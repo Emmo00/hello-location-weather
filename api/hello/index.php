@@ -7,7 +7,7 @@ $visitor_name = '';
 foreach (explode('&', $query_string) as $query) {
 	$info = explode('=', $query);
 	if ($info[0] == 'visitor_name') {
-		$visitor_name = $info[1];
+		$visitor_name = urldecode($info[1]);
 	}
 }
 
@@ -20,6 +20,7 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_URL, $ip_location_api_url);
 $result = curl_exec($ch);
+curl_close($ch);
 $result = unserialize($result);
 $user_lon = $result['lat'];
 $user_lat = $result['lon'];
@@ -31,6 +32,7 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_URL, $weather_api_url);
 $result = curl_exec($ch);
+curl_close($ch);
 
 $weather = json_decode($result);
 $temperature = $weather->current->temperature_2m;
@@ -45,3 +47,4 @@ $response = [
 // send response
 header('Content-Type: application/json');
 echo json_encode($response);
+exit;
