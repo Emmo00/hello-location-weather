@@ -19,3 +19,17 @@ GET <example.com>/api/hello?visitor_name="Emmo00"
     "greeting": "Hello, Emmo00!, the temperature is 11 degrees Celcius in Lagos"
 }
 ```
+
+## Start Nodejs Server
+
+### install dependencies
+
+```bash
+npm install
+```
+
+### run server
+
+```bash
+node app.js
+```
